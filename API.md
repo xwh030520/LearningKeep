@@ -128,4 +128,94 @@
 >==x==--待计算的数值
 >==return==--返回一个数的双曲正切函数
 
+>[!Math.asinh(x)]- 
+>==x==--一个数值
+>==return==--返回一个数值的反双曲正弦值
+
+>[!Math.acosh(x)]- 
+>==x==--一个数值
+>==return==--返回一个数值的反双曲余弦值
+
+>[!Math.atanh(x)]-
+>==x==--一个数值
+>==return==--返回一个数的反双曲余弦值，若该数大于1或者小于-1则返回NaN
+
+>[!Math.pow(base,exponent)]-
+>==base==--基数
+>==exponent==--指数
+>==return==--返回基数base的指数exponent次幂
+
+>[!Math.exp(x)]-
+>==x==--一个数值
+>==return==--返回e^x
+
+>[!note]- Math.expm1(x)
+>==x==--任意数字
+>==return==--返回E^x  -1
+
+>[!note]- Math.log10(x)
+>==x==--任意数字
+>==return==--返回一个数字以10为底的对数，若传入的参数小于0，则返回NaN
+>*例子*：Math.log10（100）； // 2
+>*拓展*：logb(c),以b为底的对数，底数b要乘方多少次才能得到c。
+
+>[!note]- Math.log1p(x)
+>==x==--任意数字
+>==return==--返回一个数字加一后的自然对数（底为E）,即loge(x+1)
+\
+
+>[!note]- Math.log2(x)
+>==x==--任意数字
+>==return==--返回一个数字以2为底的对数。若传入的参数小于0，则返回NaN
+
+>[!note]- Math.floor(x)
+>==x==--一个数字
+>==return==--返回小于等于x的最大整数
+
+>[!note]- Math.ceil(x)
+>==x==--一个数值
+>==return==--向上舍入，返回大于等于x的最小整数
+
+>[!note]- Math.min(value1, ... , valueN)
+>==参数==--0个或多个数字
+>==return==--返回给定数值中最小的数，若任一参数不能转换为数值则返回NaN，没有参数则返回-Infinity
+
+>[!note]- Math.max(value1, ... , valueN)
+>==参数==--0个或多个数字
+>==return==--返回给定数值中最大的数，若任一参数不能转换为数值则返回NaN，没有参数则返回-Infinity
+
+>[!note]- Math.random()
+>==return==--无参数，返回一个大于等于0且小于1的伪随机浮点数
+
+>[!note]- Math.round(x)
+>==x==--一个数值
+>==return==--返回x四舍五入到最接近的整数
+
+>[!note]- Math.fround(doubleFloat)
+>==doubleFloat==--一个Number，若参数为非数字类型，则会被转成数字。无法转换则设置为NaN
+>==return==--doubleFloat最接近的32位单精度浮点数表示
+
+>[!note]- Math.trunc(value)
+>==value==--任意数字
+>==return==--value的整数部分
+
+>[!note]- Math.sqrt(x)
+>==x==--一个数值
+>==return==--返回一个数的平方根，若参数为负值则返回NaN
+
+>[!note]- Math.cbrt(x)
+>==x==--任意数字
+>==return==--x的立方根
+
+>[!note]- Math.hypot(value1,value2, ...)
+>==value1,value2, ...==--任意个数字
+>==return==--将所提供的参数求平方和后开平方根。若有参数不能转换为数字，则返回NaN
+
+>[!note]- Math.sign(x)
+>==x==--任意数字
+>==return==--返回一个数字的符号，指示数字是正数，负数还是零
+
+静态属性
+>[!tip]- Math.E
+>表示欧拉数，即自然对数的底数e，其值约为2.718
 
