@@ -78,7 +78,7 @@
 >==radix==--一个整数，范围在2-36之间，用于指定表示数字值的基数，默认为10。
 >==return==--一个表示指定数字值的字符串。
 
-
+- - -
 # ==数学对象（Math）==
 #数学对象API
 ***方法：***
@@ -215,7 +215,216 @@
 >==x==--任意数字
 >==return==--返回一个数字的符号，指示数字是正数，负数还是零
 
-静态属性
+***静态属性：***
 >[!tip]- Math.E
 >表示欧拉数，即自然对数的底数e，其值约为2.718
+
+- - -
+## 日期对象（Date）
+#日期对象API
+>[!success]- Date实例
+>（1）new Date()
+>==无参数==
+>新创建的Date对象表示实例化时刻的日期和时间
+>- - -
+>（2）new Date(value)
+>==value==--一个Unix时间戳，它是一个整数值，表示自1970年1月1日00:00:00 UTC以来的毫秒数
+>- - -
+>（3）new Date(dateString)
+>==dateString==--表示日期的字符串值。该字符串应该能被Date.parse()正确方法识别。
+>- - -
+>（4）new Date(year, monthIndex [, day [, hours [, minutes [, seconds [ , milliseconds ]]]]]);
+>==year==--表示年份的整数值，0-99会被映射至1900年至1999年，其他值代表实际年份
+>==monthIndex==--表示月份的整数值，从0到11
+>==date(可选)==--表示一个月中的第几天的整数值，从1开始，默认值为1
+>==hours(可选)==--表示一天中的小时数的整数值，默认为0
+>==minutes(可选)==--表示一个完整时间中的分钟部分的整数值，默认为0
+>==seconds==--表示一个完整时间中的秒部分的整数值，默认为0
+>==milliseconds==--表示一个完整时间的毫秒部分的整数值，默认为0
+
+## String对象
+#字符串对象API
+>[!success]- 构造函数 new String(thing)
+>String对象用于表示和操作字符序列
+>==thing==--任何要转换为字符串的内容
+>==return==--返回String类型的原始值
+>***注：***String函数返回一个字符串（即原始值）；而String（）生成了一个类型为String的实例（即一个对象包装器）
+
+***静态方法：***
+>[!tip]- String.fromCharCode(num1,num2,/* ..., */ numN)
+>==numN==--表示一个UTF-16码元
+>==return==--一个长度为N的字符串，由N个指定的UTF-16码元组成
+>*例子：*String.fromCharCode(65,66,67)；返回ABC
+
+***实例方法：***
+>[!example]- String.prototype.toLowerCase()
+>==return==--将字符串转换为小写形式后的值
+
+## 向量相关（Vec3）
+>[!error]- 向量
+>数学定义：有序的三元数组（x,y,z），几何上表示为**从三维坐标系原点（0,0,0）指向空间中点（x,y,z）的有向线段**。向量核心特征是方向（线段指向的方位）和大小（线段长度，非负数值）
+>==**向量长度：**== length = $x^2 + y^2 + z^2$
+>==**单位向量：**==Normaliz = $(x/length,y/length, z/length)$。模为1的向量
+>==**向量加法：**== $Vec3(a.x+b.x, a.y+b.y, a.z+b.z)$。两个向量的和向量
+>==**向量减法：**== $Vec3(a.x-b.x, a.y-b.y, a.z-b.z)$。从向量b指向向量a的新向量
+>==**数乘：**== $Vec3(x*n, y*n, z*n)$。放大/缩小向量的大小，方向不变
+>==**点乘：**== $a·b = a.x*b.x + a.y*b.y + a.z*b.z$。结果是一个标量（数字），非向量
+>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;核心含义：**>0**，夹角<90°（方向相近）；**=0**，夹角=90°（垂直）；**<0**，夹角>90°（方向相反）。
+>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;公式延伸：$cosθ = a·b / |a|*|b|$。为两向量夹角
+>==**叉乘：**== $a*b = Vec3(a.y*b.z - a.z*b.y, a.z*b.x - a.x*b.z, a.x*b.y - a.y*b.x)$。结果是一个新向量，且垂直于a和b所在的平面。新向量的模等于a和b组成的平行四边形的面积。常用于判断相对左右方向。
+>==**向量投影：**== 向量a在向量b上的投影 = $(a·b / |b|²)$。将向量a投射到向量b所在直线上的新向量。
+
+***静态方法：***
+>[!tip]- $Vec3.zero$<Out extends IVec3Like>($out: Out$): Out;
+>==returnd==--将out赋值为零向量
+
+>[!tip]- $Vec3.clone$<Out extends IVec3Like>($a: Out$): Vec3;
+>==a==--源对象
+>==return==--获得指定向量的拷贝，返回新创建的Vec3实例
+
+>[!tip]- $Vec3.copy$<Out extends IVec3Like,Vec3Like extends IVec3Like>($out: Out, a: Vec3Like$): Out;
+>==a==--源对象
+>==return==--返回复用的out对象
+
+>[!tip]- $Vec3.set$<Out extends IVec3Like>($out: Out,x: number, y: number, z: number$): Out;
+>==out==--目标对象
+>==return==--返回out设置成x,y,z的值
+
+>[!tip]- $Vec3.add$<Out extends IVec3Like>($out: Out, a: IVec3Like, b: IVec3Like$): Out;
+>==out==--结果存储对象
+>==a==--第一个加数向量
+>==b==--第二个加数向量
+>==return==--返回两向量相加的结果out
+
+>[!tip]- $Vec3.subtract$<Out extends IVec3Like>($out: Out, a: IVec3Like, b: IVec3Like$) : Out;
+>==out==--结果赋值对象
+>==a==--被减数向量
+>==b==--减数向量
+>==return==-- 计算两个向量的差(a-b)的结果out,out方向是由b指向a
+
+>[!tip]- $Vec3.multiply$<Out extends IVec3Like>($out: Out, a: IVec3Like, b: IVec3Like$): Out;
+>==out==--结果赋值对象
+>==a==--第一个乘数向量
+>==b==--第二个乘数向量
+>==return==--计算两个向量的分量级乘法的结果向量out。常对向量做（轴级独立缩放/反向）
+
+>[!tip]- $Vec3.divide$<Out extends IVec3Like>($out: Out, a: IVec3Like, b: IVec3Like$): Out;
+>==out==--结果存储对象
+>==a==--被除数向量
+>==b==--除数向量
+>==return==--计算两个向量的分量级除法（对应x/y/z分别相除）的结果out。几何意义是对向量a的各轴做“反向缩放”。
+
+>[!tip]- $Vec3.ceil$<Out extends IVec3Like>($out: Out, a: IVec3Like$): Out;
+>==out==--结果存储对象
+>==a==--需要取整的源向量
+>==return==--对向量a的x/y/z三个分量分别执行向上取整，返回结果out
+
+>[!tip]- $Vec3.floor$<Out extends IVec3Like>($out: Out, a: IVec3Like$): Out;
+>==out==--结果存储对象
+>==a==--需要取整的源向量
+>==return==--对向量a的x/y/z三个分量分别执行向下取整操作，返回结果out
+
+>[!tip]- $Vec3.min$<Out extends IVec3Like>($out: Out, a: IVec3Like, b: IVec3Like$): Out;
+>==out==--结果存储对象
+>==a==--第一个对比向量
+>==b==--第二个对比向量
+>==return==--对向量a和b的x/y/z分量分别取最小值，返回结果out
+
+>[!tip]- $Vec3.max$<Out extends IVec3Like>($out: Out, a: IVec3Like, b: IVec3Like$): Out;
+>==out==--结果存储对象
+>==a==--第一个对比向量
+>==b==--第二个对比向量
+>==return==--对两个向量a和b的x/y/z分量分别取最大值，返回结果out
+
+>[!tip]- $Vec3.round$<Out extends IVec3Like>($out: Out, a: IVec3Like$): Out;
+>==out==--结果存储对象
+>==a==--需要取整的源向量
+>==return==--对向量a的x/y/z三个分量分别执行四舍五入操作，返回结果out
+
+>[!tip]- $Vec3.multiplyScalar$<Out extends IVec3Like, Vec3Like extends IVec3Like>($out: Out, a: Vec3Like, b: number$): Out;
+>==out==--结果存储对象
+>==a==--源向量
+>==b==--乘数，数字类型
+>==return==--对向量a的x/y/z三个分量统一乘以数字b，返回结果out
+
+>[!tip]- $Vec3.scaleAndAdd$<Out extends IVec3Like>($out: Out, a: IVec3Like, b: IVec3Like, scale: number$): Out;
+>==out==--结果存储对象
+>==a==--被加向量
+>==b==--待缩放后相加的向量
+>==scale==--缩放系数，数字
+>==return==--$a+b*scale$，返回结果out
+
+>[!tip]- $Vec3.distance$($a: IVec3Like, b: IVec3Like$): number;
+>==a==--第一个点/向量
+>==b==--第二个点/向量
+>==return==--计算出两个3D点（向量a和b）之间的欧式直线距离（即空间中两点的直线长度）
+
+>[!tip]- $Vec3.squaredDistance$($a: IVec3Like, b: IVec3Like$): number;
+==a==--第一个点/向量
+==b==--第二个点/向量
+==return==--计算两个3D点（向量a和b）之间直线距离的平方值
+
+>[!tip]- $Vec3.len$($a: IVec3Like$): number;
+>==a==--需要计算长度的向量
+>==return==--计算单个3D向量a的模长（长度）（即向量从原点到终点的直线距离）
+
+>[!tip]- $Vec3.lengthSqr$($a: IVec3Like$): number;
+>==a==--需要计算长度平方的向量
+>==return==--计算单个3D向量a的模长平方值
+
+>[!tip]- $Vec3.negate$<Out extends IVec3Like>($out: Out, a: IVec3Like$): Out;
+>==out==--结果存储对象
+>==a==--需要取反的源向量
+>==return==--对向量a的x/y/z分量取相反数（方向完全反转，长度保持不变）
+
+>[!tip]- $Vec3.invert$<Out extends IVec3Like>($out: Out, a: IVec3LIke$): Out;
+>==out==--结果存储对象
+>==a==--需要取倒数的源向量
+>==return==--对向量a的x/y/z分量分别执行取倒数操作（1/分量），返回结果out。
+
+>[!tip]- $Vec3.invertSafe$<Out extends IVec3Like>($out: Out, a: IVec3Like$): Out;
+>==out==--结果存储对象
+>==a==--需要取倒数的源向量
+>==return==--对向量a的x/y/z分量安全取倒数（自动处理0/极小分量，避免）
+
+>[!tip]- $Vec3.normalize$<Out extends IVec3Like>($out: Out, a: IVec3Like$): Out;
+>==out==--结果存储对象
+>==a==--需要归一化的源向量
+>==return==--将a归一化为单位向量（方向保持不变，模长强制变为1）
+
+>[!tip]- $Vec3.dot$<Out extends IVec3Like>($a: Out, b: IVec3Like$): number;
+>==a==--第一个向量
+>==b==--第二个向量
+>==return==--计算两个3D向量a和b的点积（数量积），返回一个标量（纯数字）。
+
+>[!tip]- $Vec3.cross$<Out extends IVec3Like>($out: Out, a: IVec3Like, b: IVec3Like$): Out;
+>==out==--结果存储对象
+>==a==--第一个向量，基准向量
+>==b==--第二个向量，待判断向量
+>==return==--计算两个3D向量a和b的叉积（叉积/向量积），返回一个新向量。
+
+>[!tip]- $Vec3.lerp$<Out extends IVec3Like>($out: Out, a: IVec3Like, b: IVec3Like, t: number$): Out;
+>==out==--结果存储对象
+>==a==--起点向量
+>==b==--终点向量
+>==t==--插值系数，通常取0-1
+>==return==--对两个3D向量a和b做线性插值，根据插值系数t计算出a到b连线上的中间向量，结果赋给out。
+
+>[!tip]- $Vec3.slerp$<Out extends IVec3Like>($out: Out, from: Readonly<IVec3Like>, to: Readonly<IVec3Like>, t: number$) => Out;
+>==out==--结果存储对象
+>==from==--起始方向向量，已归一化
+>==to==--目标方向向量，已归一化
+>==t==--插值系数，通常0-1
+>==return==--对两个单位向量（方向向量）做球面线性插值，沿球面弧度平滑过渡（而非直线），保证插值过程中方向向量的模长始终为1。返回值为Out类型，插值后的单位方向向量。
+
+>[!tip]- $Vec3.random$<Out extends IVec3Like>($out: Out, scale?: number$): Out;
+>==out==--结果存储对象
+>==scale==--可选，缩放系数，默认1
+>==return==--生成一个各分量为随机值的3D向量，可选scale参数控制向量的模长范围。
+
+>[!tip]- $Vec3.transformMat4$<Out extends IVec3Like>($out: Out, a: IVec3Like, m: IMatLike$): Out;
+>==out==--结果存储对象
+>==a==--待变换的3D向量
+>==m==--4\*4变换矩阵
+>==return==--将3D向量a（点/方向）通过4\*4矩阵m进行齐次变换，返回结果out。核心用于坐标空间转换。
 
